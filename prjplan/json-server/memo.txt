@@ -1,0 +1,2 @@
+npx json-server --watch db.json -p 3000
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
