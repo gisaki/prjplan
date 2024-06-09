@@ -27,7 +27,7 @@ Map<String, dynamic> _$$BusinessImplToJson(_$BusinessImpl instance) =>
 _$TaskImpl _$$TaskImplFromJson(Map<String, dynamic> json) => _$TaskImpl(
       json['projectId'] as String,
       json['member'] as String,
-      DateTime.parse(json['month'] as String),
+      const DateTimeConverter().fromJson(json['month'] as String),
       (json['mm'] as num).toDouble(),
     );
 
@@ -35,6 +35,6 @@ Map<String, dynamic> _$$TaskImplToJson(_$TaskImpl instance) =>
     <String, dynamic>{
       'projectId': instance.projectId,
       'member': instance.member,
-      'month': instance.month.toIso8601String(),
+      'month': const DateTimeConverter().toJson(instance.month),
       'mm': instance.mm,
     };

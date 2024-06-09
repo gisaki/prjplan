@@ -1,2 +1,7 @@
 npx json-server --watch db.json -p 3000
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+
+id は自動生成される。
+古いバージョンは id が 整数であったが、新しいバージョンは文字列になる
+参考: 
+https://qiita.com/aokiplayer/items/78b6a6c8287d8024cc5d

@@ -250,6 +250,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 mixin _$Task {
   String get projectId => throw _privateConstructorUsedError;
   String get member => throw _privateConstructorUsedError;
+  @DateTimeConverter()
   DateTime get month => throw _privateConstructorUsedError;
   double get mm => throw _privateConstructorUsedError;
 
@@ -263,7 +264,11 @@ abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
-  $Res call({String projectId, String member, DateTime month, double mm});
+  $Res call(
+      {String projectId,
+      String member,
+      @DateTimeConverter() DateTime month,
+      double mm});
 }
 
 /// @nodoc
@@ -312,7 +317,11 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       __$$TaskImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String projectId, String member, DateTime month, double mm});
+  $Res call(
+      {String projectId,
+      String member,
+      @DateTimeConverter() DateTime month,
+      double mm});
 }
 
 /// @nodoc
@@ -354,7 +363,8 @@ class __$$TaskImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TaskImpl implements _Task {
-  const _$TaskImpl(this.projectId, this.member, this.month, this.mm);
+  const _$TaskImpl(
+      this.projectId, this.member, @DateTimeConverter() this.month, this.mm);
 
   factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskImplFromJson(json);
@@ -364,6 +374,7 @@ class _$TaskImpl implements _Task {
   @override
   final String member;
   @override
+  @DateTimeConverter()
   final DateTime month;
   @override
   final double mm;
@@ -405,7 +416,7 @@ class _$TaskImpl implements _Task {
 
 abstract class _Task implements Task {
   const factory _Task(final String projectId, final String member,
-      final DateTime month, final double mm) = _$TaskImpl;
+      @DateTimeConverter() final DateTime month, final double mm) = _$TaskImpl;
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
 
@@ -414,6 +425,7 @@ abstract class _Task implements Task {
   @override
   String get member;
   @override
+  @DateTimeConverter()
   DateTime get month;
   @override
   double get mm;

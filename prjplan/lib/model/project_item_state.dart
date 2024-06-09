@@ -24,6 +24,10 @@ class DateTimeConverter implements JsonConverter<DateTime, String> {
   }
 }
 
+/// プロジェクトを示すクラス
+///
+///プロジェクトは顧客ごとに期間と売り上げを管理するクラスである。
+/// [projectId] は他と同じ値を指定することが可能である。その場合同じプロジェクトで複数に分かれて売り上げがあったことを示す。
 @freezed
 class Business with _$Business {
   const factory Business(
@@ -36,10 +40,14 @@ class Business with _$Business {
       _$BusinessFromJson(json);
 }
 
+/// タスクを示すクラス
+///
+/// タスクはメンバがどのプロジェクトにどの程度の工数（費用）を投入したかを示すクラスである。
+/// [projectId] で計上する対象のプロジェクトと関連付けられる。
 @freezed
 class Task with _$Task {
-  const factory Task(
-      String projectId, String member, DateTime month, double mm) = _Task;
+  const factory Task(String projectId, String member,
+      @DateTimeConverter() DateTime month, double mm) = _Task;
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 }
 
@@ -52,6 +60,7 @@ abstract class ProjectState implements _$ProjectState {
       _ProjectState;
 
   // methods
+  // 仮
   List<String> calcMembers() {
     return members;
   }
