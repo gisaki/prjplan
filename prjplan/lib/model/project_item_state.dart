@@ -55,9 +55,8 @@ class Task with _$Task {
 abstract class ProjectState implements _$ProjectState {
   // 独自 methods を追加するため、abstract にして withではなくimplementsを利用する
   const ProjectState._(); // 独自 method を追加するため、privateのコンストラクタを追加する
-  const factory ProjectState(
-          List<Business> businesses, List<Task> tasks, List<String> members) =
-      _ProjectState;
+  const factory ProjectState(List<Business> businesses, List<Task> tasks,
+      List<String> members, List<String> customers) = _ProjectState;
 
   // methods
   // 仮

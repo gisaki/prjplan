@@ -440,6 +440,7 @@ mixin _$ProjectState {
   List<Business> get businesses => throw _privateConstructorUsedError;
   List<Task> get tasks => throw _privateConstructorUsedError;
   List<String> get members => throw _privateConstructorUsedError;
+  List<String> get customers => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProjectStateCopyWith<ProjectState> get copyWith =>
@@ -453,7 +454,10 @@ abstract class $ProjectStateCopyWith<$Res> {
       _$ProjectStateCopyWithImpl<$Res, ProjectState>;
   @useResult
   $Res call(
-      {List<Business> businesses, List<Task> tasks, List<String> members});
+      {List<Business> businesses,
+      List<Task> tasks,
+      List<String> members,
+      List<String> customers});
 }
 
 /// @nodoc
@@ -472,6 +476,7 @@ class _$ProjectStateCopyWithImpl<$Res, $Val extends ProjectState>
     Object? businesses = null,
     Object? tasks = null,
     Object? members = null,
+    Object? customers = null,
   }) {
     return _then(_value.copyWith(
       businesses: null == businesses
@@ -486,6 +491,10 @@ class _$ProjectStateCopyWithImpl<$Res, $Val extends ProjectState>
           ? _value.members
           : members // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      customers: null == customers
+          ? _value.customers
+          : customers // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -499,7 +508,10 @@ abstract class _$$ProjectStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Business> businesses, List<Task> tasks, List<String> members});
+      {List<Business> businesses,
+      List<Task> tasks,
+      List<String> members,
+      List<String> customers});
 }
 
 /// @nodoc
@@ -516,6 +528,7 @@ class __$$ProjectStateImplCopyWithImpl<$Res>
     Object? businesses = null,
     Object? tasks = null,
     Object? members = null,
+    Object? customers = null,
   }) {
     return _then(_$ProjectStateImpl(
       null == businesses
@@ -530,6 +543,10 @@ class __$$ProjectStateImplCopyWithImpl<$Res>
           ? _value._members
           : members // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      null == customers
+          ? _value._customers
+          : customers // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -537,11 +554,15 @@ class __$$ProjectStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ProjectStateImpl extends _ProjectState {
-  const _$ProjectStateImpl(final List<Business> businesses,
-      final List<Task> tasks, final List<String> members)
+  const _$ProjectStateImpl(
+      final List<Business> businesses,
+      final List<Task> tasks,
+      final List<String> members,
+      final List<String> customers)
       : _businesses = businesses,
         _tasks = tasks,
         _members = members,
+        _customers = customers,
         super._();
 
   final List<Business> _businesses;
@@ -568,9 +589,17 @@ class _$ProjectStateImpl extends _ProjectState {
     return EqualUnmodifiableListView(_members);
   }
 
+  final List<String> _customers;
+  @override
+  List<String> get customers {
+    if (_customers is EqualUnmodifiableListView) return _customers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_customers);
+  }
+
   @override
   String toString() {
-    return 'ProjectState(businesses: $businesses, tasks: $tasks, members: $members)';
+    return 'ProjectState(businesses: $businesses, tasks: $tasks, members: $members, customers: $customers)';
   }
 
   @override
@@ -581,7 +610,9 @@ class _$ProjectStateImpl extends _ProjectState {
             const DeepCollectionEquality()
                 .equals(other._businesses, _businesses) &&
             const DeepCollectionEquality().equals(other._tasks, _tasks) &&
-            const DeepCollectionEquality().equals(other._members, _members));
+            const DeepCollectionEquality().equals(other._members, _members) &&
+            const DeepCollectionEquality()
+                .equals(other._customers, _customers));
   }
 
   @override
@@ -589,7 +620,8 @@ class _$ProjectStateImpl extends _ProjectState {
       runtimeType,
       const DeepCollectionEquality().hash(_businesses),
       const DeepCollectionEquality().hash(_tasks),
-      const DeepCollectionEquality().hash(_members));
+      const DeepCollectionEquality().hash(_members),
+      const DeepCollectionEquality().hash(_customers));
 
   @JsonKey(ignore: true)
   @override
@@ -599,8 +631,11 @@ class _$ProjectStateImpl extends _ProjectState {
 }
 
 abstract class _ProjectState extends ProjectState {
-  const factory _ProjectState(final List<Business> businesses,
-      final List<Task> tasks, final List<String> members) = _$ProjectStateImpl;
+  const factory _ProjectState(
+      final List<Business> businesses,
+      final List<Task> tasks,
+      final List<String> members,
+      final List<String> customers) = _$ProjectStateImpl;
   const _ProjectState._() : super._();
 
   @override
@@ -609,6 +644,8 @@ abstract class _ProjectState extends ProjectState {
   List<Task> get tasks;
   @override
   List<String> get members;
+  @override
+  List<String> get customers;
   @override
   @JsonKey(ignore: true)
   _$$ProjectStateImplCopyWith<_$ProjectStateImpl> get copyWith =>

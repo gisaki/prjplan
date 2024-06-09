@@ -10,14 +10,13 @@ class MainPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final projectStateNotifier = ref.watch(projectStateProvider.notifier);
-    final projectState = ref.watch(projectStateProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text('メイン'),
           centerTitle: true,
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
+        drawer: _drawerArea(context, ref),
         body: Center(
           child: Column(
             children: <Widget>[
@@ -28,6 +27,51 @@ class MainPage extends ConsumerWidget {
           ),
         ));
   }
+}
+
+Widget _drawerArea(BuildContext context, WidgetRef ref) {
+  final projectStateNotifier = ref.watch(projectStateProvider.notifier);
+  final projectState = ref.watch(projectStateProvider);
+  return Drawer(
+    child: ListView(children: [
+      // それ以外の要素
+      const ListTile(
+        subtitle: Text('選択'),
+      ),
+      // 配列の要素
+      ...projectState.customers.expand((e) => [
+            ListTile(
+              title: Text(e),
+              leading: const Icon(Icons.business),
+              onTap: () {
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            const Divider(
+              thickness: 1.0,
+              color: Colors.grey,
+            ),
+          ]),
+      // それ以外の要素
+      const ListTile(
+        subtitle: Text('設定'),
+      ),
+      ListTile(
+        title: const Text('メンバ/顧客追加'),
+        trailing: IconButton(
+          icon: const Icon(Icons.navigate_next),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const MemberCustomerMngPage(),
+              ),
+            );
+          },
+        ),
+      ),
+    ]),
+  );
 }
 
 Widget _buttonArea(BuildContext context) {

@@ -24,13 +24,13 @@ class MemberCustomerMngPage extends ConsumerWidget {
                   children: [
                     Expanded(
                       // 以下で ListView を使用しているので Expanded の中に入れる
-                      child: _nameListArea(context, ref),
+                      child: _memberListArea(context, ref),
                     ),
                     Expanded(
-                      child: _nameListArea(context, ref),
+                      child: _customerListArea(context, ref),
                     ),
                     Expanded(
-                      child: _nameListArea(context, ref),
+                      child: _memberListArea(context, ref),
                     ),
                   ],
                 ),
@@ -42,7 +42,7 @@ class MemberCustomerMngPage extends ConsumerWidget {
   }
 }
 
-Widget _nameListArea(BuildContext context, WidgetRef ref) {
+Widget _memberListArea(BuildContext context, WidgetRef ref) {
   final projectStateNotifier = ref.watch(projectStateProvider.notifier);
   final projectState = ref.watch(projectStateProvider);
   return Card(
@@ -52,7 +52,10 @@ Widget _nameListArea(BuildContext context, WidgetRef ref) {
         child: ListView.builder(
           itemCount: projectState.members.length,
           itemBuilder: (context, index) {
-            return Text(projectState.members[index]);
+            return ListTile(
+              title: Text(projectState.members[index]),
+              leading: const Icon(Icons.person),
+            );
           },
         ),
       ),
@@ -67,9 +70,9 @@ Widget _nameListArea(BuildContext context, WidgetRef ref) {
               onPressed: () async {
                 final result =
                     await DialogUtils.showEditingDialog(context, '追加する名前');
-                final name = result ?? '';
-                if (name.isNotEmpty) {
-                  projectStateNotifier.addMember(name);
+                final addStr = result ?? '';
+                if (addStr.isNotEmpty) {
+                  projectStateNotifier.addMember(addStr);
                 }
               },
             ),
@@ -78,6 +81,54 @@ Widget _nameListArea(BuildContext context, WidgetRef ref) {
               tooltip: '更新',
               onPressed: () {
                 projectStateNotifier.reloadMember();
+              },
+            ),
+          ],
+        ),
+      ),
+    ],
+  ));
+}
+
+Widget _customerListArea(BuildContext context, WidgetRef ref) {
+  final projectStateNotifier = ref.watch(projectStateProvider.notifier);
+  final projectState = ref.watch(projectStateProvider);
+  return Card(
+      child: Column(
+    children: <Widget>[
+      Expanded(
+        child: ListView.builder(
+          itemCount: projectState.customers.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(projectState.customers[index]),
+              leading: const Icon(Icons.business),
+            );
+          },
+        ),
+      ),
+      Center(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start, // 上寄せ
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 均等なスペース
+          children: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.add),
+              tooltip: '追加',
+              onPressed: () async {
+                final result =
+                    await DialogUtils.showEditingDialog(context, '追加する会社名');
+                final addStr = result ?? '';
+                if (addStr.isNotEmpty) {
+                  projectStateNotifier.addCustomer(addStr);
+                }
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              tooltip: '更新',
+              onPressed: () {
+                projectStateNotifier.reloadCustomer();
               },
             ),
           ],
