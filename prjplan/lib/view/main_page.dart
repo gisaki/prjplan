@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:prjplan/view_model/project_item_notifier.dart';
 import 'package:prjplan/view/second_page.dart';
 import 'package:prjplan/view/member_customer_mng_page.dart';
 
@@ -9,6 +10,8 @@ class MainPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final projectStateNotifier = ref.watch(projectStateProvider.notifier);
+    final projectState = ref.watch(projectStateProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text('メイン'),
