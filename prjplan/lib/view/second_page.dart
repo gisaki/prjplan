@@ -19,7 +19,7 @@ class SecondPage extends ConsumerWidget {
         child: Column(
           children: [
             Text("members: ${projectState.members.length} 人"),
-            Text("members: ${projectState.members.length} 人"),
+            Text("customers: ${projectState.customers.length} 社"),
           ],
         ),
       ),

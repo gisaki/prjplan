@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:two_dimensional_scrollables/two_dimensional_scrollables.dart';
 
 import 'package:prjplan/view_model/project_item_notifier.dart';
 import 'package:prjplan/view/second_page.dart';
@@ -20,8 +21,9 @@ class MainPage extends ConsumerWidget {
         body: Center(
           child: Column(
             children: <Widget>[
-              _buttonArea(context),
-              // TODO
+              Expanded(
+                child: _table(context, ref),
+              ),
               _buttonArea(context),
             ],
           ),
@@ -108,4 +110,27 @@ Widget _buttonArea(BuildContext context) {
       ),
     ],
   ));
+}
+
+Widget _table(BuildContext context, WidgetRef ref) {
+  return TableView.builder(
+    cellBuilder: _buildCell,
+    columnCount: 20,
+    columnBuilder: _buildTableSpan,
+    rowCount: 10,
+    rowBuilder: _buildTableSpan,
+    pinnedRowCount: 1,
+    pinnedColumnCount: 1,
+  );
+}
+
+TableViewCell _buildCell(BuildContext context, TableVicinity vicinity) {
+  return TableViewCell(
+      child: Center(
+    child: Text('c: ${vicinity.column}, r: ${vicinity.row}'),
+  ));
+}
+
+TableSpan _buildTableSpan(int index) {
+  return const TableSpan(extent: FixedTableSpanExtent(50));
 }
