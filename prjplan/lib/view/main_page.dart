@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:two_dimensional_scrollables/two_dimensional_scrollables.dart';
+import 'dart:ui';
 
 import 'package:prjplan/view_model/project_item_notifier.dart';
 import 'package:prjplan/view/second_page.dart';
@@ -112,16 +113,28 @@ Widget _buttonArea(BuildContext context) {
   ));
 }
 
+class MyScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        // etc.
+      };
+}
+
 Widget _table(BuildContext context, WidgetRef ref) {
-  return TableView.builder(
-    cellBuilder: _buildCell,
-    columnCount: 20,
-    columnBuilder: _buildTableSpan,
-    rowCount: 10,
-    rowBuilder: _buildTableSpan,
-    pinnedRowCount: 1,
-    pinnedColumnCount: 1,
-  );
+  return ScrollConfiguration(
+      behavior: MyScrollBehavior(),
+      child: TableView.builder(
+        cellBuilder: _buildCell,
+        columnCount: 20,
+        columnBuilder: _buildTableSpan,
+        rowCount: 10,
+        rowBuilder: _buildTableSpan,
+        pinnedRowCount: 1,
+        pinnedColumnCount: 1,
+      ));
 }
 
 TableViewCell _buildCell(BuildContext context, TableVicinity vicinity) {
