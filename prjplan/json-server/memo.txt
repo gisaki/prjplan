@@ -1,5 +1,5 @@
-npx json-server --watch db.json -p 3000
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+npx json-server --watch db.json -p 3000
 
 id は自動生成される。
 古いバージョンは id が 整数であったが、新しいバージョンは文字列になる

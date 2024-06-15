@@ -18,7 +18,7 @@ class DialogUtils {
 }
 
 class TextEditingDialog extends StatefulWidget {
-  const TextEditingDialog({Key? key, this.text}) : super(key: key);
+  const TextEditingDialog({super.key, this.text});
   final String? text;
 
   @override

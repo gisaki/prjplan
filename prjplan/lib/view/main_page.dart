@@ -47,7 +47,7 @@ Widget _drawerArea(BuildContext context, WidgetRef ref) {
               title: Text(e),
               leading: const Icon(Icons.business),
               onTap: () {
-                // Then close the drawer
+                // drawer を閉じる
                 Navigator.pop(context);
               },
             ),
@@ -65,11 +65,16 @@ Widget _drawerArea(BuildContext context, WidgetRef ref) {
         trailing: IconButton(
           icon: const Icon(Icons.navigate_next),
           onPressed: () {
-            Navigator.of(context).push(
+            Navigator.of(context)
+                .push(
               MaterialPageRoute(
                 builder: (context) => const MemberCustomerMngPage(),
               ),
-            );
+            )
+                .then((val) {
+              // 画面遷移から戻ってきたら drawer は閉じている状態にしたいので
+              Navigator.pop(context);
+            });
           },
         ),
       ),
