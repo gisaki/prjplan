@@ -436,11 +436,545 @@ abstract class _Task implements Task {
 }
 
 /// @nodoc
+mixin _$BusinessDetail {
+  Business get business => throw _privateConstructorUsedError;
+  Map<DateTime, double> get detail => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $BusinessDetailCopyWith<BusinessDetail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BusinessDetailCopyWith<$Res> {
+  factory $BusinessDetailCopyWith(
+          BusinessDetail value, $Res Function(BusinessDetail) then) =
+      _$BusinessDetailCopyWithImpl<$Res, BusinessDetail>;
+  @useResult
+  $Res call({Business business, Map<DateTime, double> detail});
+
+  $BusinessCopyWith<$Res> get business;
+}
+
+/// @nodoc
+class _$BusinessDetailCopyWithImpl<$Res, $Val extends BusinessDetail>
+    implements $BusinessDetailCopyWith<$Res> {
+  _$BusinessDetailCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? business = null,
+    Object? detail = null,
+  }) {
+    return _then(_value.copyWith(
+      business: null == business
+          ? _value.business
+          : business // ignore: cast_nullable_to_non_nullable
+              as Business,
+      detail: null == detail
+          ? _value.detail
+          : detail // ignore: cast_nullable_to_non_nullable
+              as Map<DateTime, double>,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BusinessCopyWith<$Res> get business {
+    return $BusinessCopyWith<$Res>(_value.business, (value) {
+      return _then(_value.copyWith(business: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$BusinessDetailImplCopyWith<$Res>
+    implements $BusinessDetailCopyWith<$Res> {
+  factory _$$BusinessDetailImplCopyWith(_$BusinessDetailImpl value,
+          $Res Function(_$BusinessDetailImpl) then) =
+      __$$BusinessDetailImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({Business business, Map<DateTime, double> detail});
+
+  @override
+  $BusinessCopyWith<$Res> get business;
+}
+
+/// @nodoc
+class __$$BusinessDetailImplCopyWithImpl<$Res>
+    extends _$BusinessDetailCopyWithImpl<$Res, _$BusinessDetailImpl>
+    implements _$$BusinessDetailImplCopyWith<$Res> {
+  __$$BusinessDetailImplCopyWithImpl(
+      _$BusinessDetailImpl _value, $Res Function(_$BusinessDetailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? business = null,
+    Object? detail = null,
+  }) {
+    return _then(_$BusinessDetailImpl(
+      null == business
+          ? _value.business
+          : business // ignore: cast_nullable_to_non_nullable
+              as Business,
+      null == detail
+          ? _value._detail
+          : detail // ignore: cast_nullable_to_non_nullable
+              as Map<DateTime, double>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BusinessDetailImpl implements _BusinessDetail {
+  const _$BusinessDetailImpl(this.business, final Map<DateTime, double> detail)
+      : _detail = detail;
+
+  @override
+  final Business business;
+  final Map<DateTime, double> _detail;
+  @override
+  Map<DateTime, double> get detail {
+    if (_detail is EqualUnmodifiableMapView) return _detail;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_detail);
+  }
+
+  @override
+  String toString() {
+    return 'BusinessDetail(business: $business, detail: $detail)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BusinessDetailImpl &&
+            (identical(other.business, business) ||
+                other.business == business) &&
+            const DeepCollectionEquality().equals(other._detail, _detail));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, business, const DeepCollectionEquality().hash(_detail));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BusinessDetailImplCopyWith<_$BusinessDetailImpl> get copyWith =>
+      __$$BusinessDetailImplCopyWithImpl<_$BusinessDetailImpl>(
+          this, _$identity);
+}
+
+abstract class _BusinessDetail implements BusinessDetail {
+  const factory _BusinessDetail(
+          final Business business, final Map<DateTime, double> detail) =
+      _$BusinessDetailImpl;
+
+  @override
+  Business get business;
+  @override
+  Map<DateTime, double> get detail;
+  @override
+  @JsonKey(ignore: true)
+  _$$BusinessDetailImplCopyWith<_$BusinessDetailImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$MemberDetail {
+  List<Task> get filterdTasks => throw _privateConstructorUsedError;
+  Map<DateTime, double> get detail => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $MemberDetailCopyWith<MemberDetail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MemberDetailCopyWith<$Res> {
+  factory $MemberDetailCopyWith(
+          MemberDetail value, $Res Function(MemberDetail) then) =
+      _$MemberDetailCopyWithImpl<$Res, MemberDetail>;
+  @useResult
+  $Res call({List<Task> filterdTasks, Map<DateTime, double> detail});
+}
+
+/// @nodoc
+class _$MemberDetailCopyWithImpl<$Res, $Val extends MemberDetail>
+    implements $MemberDetailCopyWith<$Res> {
+  _$MemberDetailCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? filterdTasks = null,
+    Object? detail = null,
+  }) {
+    return _then(_value.copyWith(
+      filterdTasks: null == filterdTasks
+          ? _value.filterdTasks
+          : filterdTasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+      detail: null == detail
+          ? _value.detail
+          : detail // ignore: cast_nullable_to_non_nullable
+              as Map<DateTime, double>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$MemberDetailImplCopyWith<$Res>
+    implements $MemberDetailCopyWith<$Res> {
+  factory _$$MemberDetailImplCopyWith(
+          _$MemberDetailImpl value, $Res Function(_$MemberDetailImpl) then) =
+      __$$MemberDetailImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<Task> filterdTasks, Map<DateTime, double> detail});
+}
+
+/// @nodoc
+class __$$MemberDetailImplCopyWithImpl<$Res>
+    extends _$MemberDetailCopyWithImpl<$Res, _$MemberDetailImpl>
+    implements _$$MemberDetailImplCopyWith<$Res> {
+  __$$MemberDetailImplCopyWithImpl(
+      _$MemberDetailImpl _value, $Res Function(_$MemberDetailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? filterdTasks = null,
+    Object? detail = null,
+  }) {
+    return _then(_$MemberDetailImpl(
+      null == filterdTasks
+          ? _value._filterdTasks
+          : filterdTasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+      null == detail
+          ? _value._detail
+          : detail // ignore: cast_nullable_to_non_nullable
+              as Map<DateTime, double>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MemberDetailImpl implements _MemberDetail {
+  const _$MemberDetailImpl(
+      final List<Task> filterdTasks, final Map<DateTime, double> detail)
+      : _filterdTasks = filterdTasks,
+        _detail = detail;
+
+  final List<Task> _filterdTasks;
+  @override
+  List<Task> get filterdTasks {
+    if (_filterdTasks is EqualUnmodifiableListView) return _filterdTasks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filterdTasks);
+  }
+
+  final Map<DateTime, double> _detail;
+  @override
+  Map<DateTime, double> get detail {
+    if (_detail is EqualUnmodifiableMapView) return _detail;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_detail);
+  }
+
+  @override
+  String toString() {
+    return 'MemberDetail(filterdTasks: $filterdTasks, detail: $detail)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MemberDetailImpl &&
+            const DeepCollectionEquality()
+                .equals(other._filterdTasks, _filterdTasks) &&
+            const DeepCollectionEquality().equals(other._detail, _detail));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_filterdTasks),
+      const DeepCollectionEquality().hash(_detail));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MemberDetailImplCopyWith<_$MemberDetailImpl> get copyWith =>
+      __$$MemberDetailImplCopyWithImpl<_$MemberDetailImpl>(this, _$identity);
+}
+
+abstract class _MemberDetail implements MemberDetail {
+  const factory _MemberDetail(
+          final List<Task> filterdTasks, final Map<DateTime, double> detail) =
+      _$MemberDetailImpl;
+
+  @override
+  List<Task> get filterdTasks;
+  @override
+  Map<DateTime, double> get detail;
+  @override
+  @JsonKey(ignore: true)
+  _$$MemberDetailImplCopyWith<_$MemberDetailImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$ViewTable {
+  List<BusinessDetail> get businessDetails =>
+      throw _privateConstructorUsedError; // 月ごとに工数を細分化したプロジェクト
+  List<MemberDetail> get memberDetails =>
+      throw _privateConstructorUsedError; // 月ごとに工数を集計した人員アサイン
+  List<List<String>> get captions =>
+      throw _privateConstructorUsedError; // 表示用データ（工数）
+  List<List<double>> get mms => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ViewTableCopyWith<ViewTable> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ViewTableCopyWith<$Res> {
+  factory $ViewTableCopyWith(ViewTable value, $Res Function(ViewTable) then) =
+      _$ViewTableCopyWithImpl<$Res, ViewTable>;
+  @useResult
+  $Res call(
+      {List<BusinessDetail> businessDetails,
+      List<MemberDetail> memberDetails,
+      List<List<String>> captions,
+      List<List<double>> mms});
+}
+
+/// @nodoc
+class _$ViewTableCopyWithImpl<$Res, $Val extends ViewTable>
+    implements $ViewTableCopyWith<$Res> {
+  _$ViewTableCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? businessDetails = null,
+    Object? memberDetails = null,
+    Object? captions = null,
+    Object? mms = null,
+  }) {
+    return _then(_value.copyWith(
+      businessDetails: null == businessDetails
+          ? _value.businessDetails
+          : businessDetails // ignore: cast_nullable_to_non_nullable
+              as List<BusinessDetail>,
+      memberDetails: null == memberDetails
+          ? _value.memberDetails
+          : memberDetails // ignore: cast_nullable_to_non_nullable
+              as List<MemberDetail>,
+      captions: null == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as List<List<String>>,
+      mms: null == mms
+          ? _value.mms
+          : mms // ignore: cast_nullable_to_non_nullable
+              as List<List<double>>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ViewTableImplCopyWith<$Res>
+    implements $ViewTableCopyWith<$Res> {
+  factory _$$ViewTableImplCopyWith(
+          _$ViewTableImpl value, $Res Function(_$ViewTableImpl) then) =
+      __$$ViewTableImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {List<BusinessDetail> businessDetails,
+      List<MemberDetail> memberDetails,
+      List<List<String>> captions,
+      List<List<double>> mms});
+}
+
+/// @nodoc
+class __$$ViewTableImplCopyWithImpl<$Res>
+    extends _$ViewTableCopyWithImpl<$Res, _$ViewTableImpl>
+    implements _$$ViewTableImplCopyWith<$Res> {
+  __$$ViewTableImplCopyWithImpl(
+      _$ViewTableImpl _value, $Res Function(_$ViewTableImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? businessDetails = null,
+    Object? memberDetails = null,
+    Object? captions = null,
+    Object? mms = null,
+  }) {
+    return _then(_$ViewTableImpl(
+      null == businessDetails
+          ? _value._businessDetails
+          : businessDetails // ignore: cast_nullable_to_non_nullable
+              as List<BusinessDetail>,
+      null == memberDetails
+          ? _value._memberDetails
+          : memberDetails // ignore: cast_nullable_to_non_nullable
+              as List<MemberDetail>,
+      null == captions
+          ? _value._captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as List<List<String>>,
+      null == mms
+          ? _value._mms
+          : mms // ignore: cast_nullable_to_non_nullable
+              as List<List<double>>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ViewTableImpl implements _ViewTable {
+  const _$ViewTableImpl(
+      final List<BusinessDetail> businessDetails,
+      final List<MemberDetail> memberDetails,
+      final List<List<String>> captions,
+      final List<List<double>> mms)
+      : _businessDetails = businessDetails,
+        _memberDetails = memberDetails,
+        _captions = captions,
+        _mms = mms;
+
+  final List<BusinessDetail> _businessDetails;
+  @override
+  List<BusinessDetail> get businessDetails {
+    if (_businessDetails is EqualUnmodifiableListView) return _businessDetails;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_businessDetails);
+  }
+
+// 月ごとに工数を細分化したプロジェクト
+  final List<MemberDetail> _memberDetails;
+// 月ごとに工数を細分化したプロジェクト
+  @override
+  List<MemberDetail> get memberDetails {
+    if (_memberDetails is EqualUnmodifiableListView) return _memberDetails;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_memberDetails);
+  }
+
+// 月ごとに工数を集計した人員アサイン
+  final List<List<String>> _captions;
+// 月ごとに工数を集計した人員アサイン
+  @override
+  List<List<String>> get captions {
+    if (_captions is EqualUnmodifiableListView) return _captions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_captions);
+  }
+
+// 表示用データ（工数）
+  final List<List<double>> _mms;
+// 表示用データ（工数）
+  @override
+  List<List<double>> get mms {
+    if (_mms is EqualUnmodifiableListView) return _mms;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_mms);
+  }
+
+  @override
+  String toString() {
+    return 'ViewTable(businessDetails: $businessDetails, memberDetails: $memberDetails, captions: $captions, mms: $mms)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ViewTableImpl &&
+            const DeepCollectionEquality()
+                .equals(other._businessDetails, _businessDetails) &&
+            const DeepCollectionEquality()
+                .equals(other._memberDetails, _memberDetails) &&
+            const DeepCollectionEquality().equals(other._captions, _captions) &&
+            const DeepCollectionEquality().equals(other._mms, _mms));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_businessDetails),
+      const DeepCollectionEquality().hash(_memberDetails),
+      const DeepCollectionEquality().hash(_captions),
+      const DeepCollectionEquality().hash(_mms));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ViewTableImplCopyWith<_$ViewTableImpl> get copyWith =>
+      __$$ViewTableImplCopyWithImpl<_$ViewTableImpl>(this, _$identity);
+}
+
+abstract class _ViewTable implements ViewTable {
+  const factory _ViewTable(
+      final List<BusinessDetail> businessDetails,
+      final List<MemberDetail> memberDetails,
+      final List<List<String>> captions,
+      final List<List<double>> mms) = _$ViewTableImpl;
+
+  @override
+  List<BusinessDetail> get businessDetails;
+  @override // 月ごとに工数を細分化したプロジェクト
+  List<MemberDetail> get memberDetails;
+  @override // 月ごとに工数を集計した人員アサイン
+  List<List<String>> get captions;
+  @override // 表示用データ（工数）
+  List<List<double>> get mms;
+  @override
+  @JsonKey(ignore: true)
+  _$$ViewTableImplCopyWith<_$ViewTableImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ProjectState {
   List<Business> get businesses => throw _privateConstructorUsedError;
   List<Task> get tasks => throw _privateConstructorUsedError;
   List<String> get members => throw _privateConstructorUsedError;
   List<String> get customers => throw _privateConstructorUsedError;
+  ViewTable get viewTable => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProjectStateCopyWith<ProjectState> get copyWith =>
@@ -457,7 +991,10 @@ abstract class $ProjectStateCopyWith<$Res> {
       {List<Business> businesses,
       List<Task> tasks,
       List<String> members,
-      List<String> customers});
+      List<String> customers,
+      ViewTable viewTable});
+
+  $ViewTableCopyWith<$Res> get viewTable;
 }
 
 /// @nodoc
@@ -477,6 +1014,7 @@ class _$ProjectStateCopyWithImpl<$Res, $Val extends ProjectState>
     Object? tasks = null,
     Object? members = null,
     Object? customers = null,
+    Object? viewTable = null,
   }) {
     return _then(_value.copyWith(
       businesses: null == businesses
@@ -495,7 +1033,19 @@ class _$ProjectStateCopyWithImpl<$Res, $Val extends ProjectState>
           ? _value.customers
           : customers // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      viewTable: null == viewTable
+          ? _value.viewTable
+          : viewTable // ignore: cast_nullable_to_non_nullable
+              as ViewTable,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ViewTableCopyWith<$Res> get viewTable {
+    return $ViewTableCopyWith<$Res>(_value.viewTable, (value) {
+      return _then(_value.copyWith(viewTable: value) as $Val);
+    });
   }
 }
 
@@ -511,7 +1061,11 @@ abstract class _$$ProjectStateImplCopyWith<$Res>
       {List<Business> businesses,
       List<Task> tasks,
       List<String> members,
-      List<String> customers});
+      List<String> customers,
+      ViewTable viewTable});
+
+  @override
+  $ViewTableCopyWith<$Res> get viewTable;
 }
 
 /// @nodoc
@@ -529,6 +1083,7 @@ class __$$ProjectStateImplCopyWithImpl<$Res>
     Object? tasks = null,
     Object? members = null,
     Object? customers = null,
+    Object? viewTable = null,
   }) {
     return _then(_$ProjectStateImpl(
       null == businesses
@@ -547,6 +1102,10 @@ class __$$ProjectStateImplCopyWithImpl<$Res>
           ? _value._customers
           : customers // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      null == viewTable
+          ? _value.viewTable
+          : viewTable // ignore: cast_nullable_to_non_nullable
+              as ViewTable,
     ));
   }
 }
@@ -558,7 +1117,8 @@ class _$ProjectStateImpl extends _ProjectState {
       final List<Business> businesses,
       final List<Task> tasks,
       final List<String> members,
-      final List<String> customers)
+      final List<String> customers,
+      this.viewTable)
       : _businesses = businesses,
         _tasks = tasks,
         _members = members,
@@ -598,8 +1158,11 @@ class _$ProjectStateImpl extends _ProjectState {
   }
 
   @override
+  final ViewTable viewTable;
+
+  @override
   String toString() {
-    return 'ProjectState(businesses: $businesses, tasks: $tasks, members: $members, customers: $customers)';
+    return 'ProjectState(businesses: $businesses, tasks: $tasks, members: $members, customers: $customers, viewTable: $viewTable)';
   }
 
   @override
@@ -612,7 +1175,9 @@ class _$ProjectStateImpl extends _ProjectState {
             const DeepCollectionEquality().equals(other._tasks, _tasks) &&
             const DeepCollectionEquality().equals(other._members, _members) &&
             const DeepCollectionEquality()
-                .equals(other._customers, _customers));
+                .equals(other._customers, _customers) &&
+            (identical(other.viewTable, viewTable) ||
+                other.viewTable == viewTable));
   }
 
   @override
@@ -621,7 +1186,8 @@ class _$ProjectStateImpl extends _ProjectState {
       const DeepCollectionEquality().hash(_businesses),
       const DeepCollectionEquality().hash(_tasks),
       const DeepCollectionEquality().hash(_members),
-      const DeepCollectionEquality().hash(_customers));
+      const DeepCollectionEquality().hash(_customers),
+      viewTable);
 
   @JsonKey(ignore: true)
   @override
@@ -635,7 +1201,8 @@ abstract class _ProjectState extends ProjectState {
       final List<Business> businesses,
       final List<Task> tasks,
       final List<String> members,
-      final List<String> customers) = _$ProjectStateImpl;
+      final List<String> customers,
+      final ViewTable viewTable) = _$ProjectStateImpl;
   const _ProjectState._() : super._();
 
   @override
@@ -646,6 +1213,8 @@ abstract class _ProjectState extends ProjectState {
   List<String> get members;
   @override
   List<String> get customers;
+  @override
+  ViewTable get viewTable;
   @override
   @JsonKey(ignore: true)
   _$$ProjectStateImplCopyWith<_$ProjectStateImpl> get copyWith =>

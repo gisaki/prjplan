@@ -10,7 +10,17 @@ final projectStateProvider =
 
 class ProjectStateNotifier extends StateNotifier<ProjectState> {
   ProjectStateNotifier()
-      : super(const ProjectState([], [], ['Aさん', 'Bさん'], ['C社', 'DDD社']));
+      : super(const ProjectState(
+            [],
+            [],
+            ['Aさん', 'Bさん'],
+            ['C社', 'DDD社'],
+            ViewTable([], [], [
+              [
+                "1行-1列",
+                "1行-2列",
+              ],
+            ], [])));
 
   // 追加する
   void addMember(String newMember) {
@@ -54,6 +64,8 @@ class ProjectStateNotifier extends StateNotifier<ProjectState> {
     state = state.copyWith(customers: newCustomers);
   }
 
-  // 更新する
-  void changeSample(int age) {}
+  void calcViewTable(String customer) {
+    final newViewTable = state.calcViewTable(customer, DateTime.now());
+    state = state.copyWith(viewTable: newViewTable);
+  }
 }

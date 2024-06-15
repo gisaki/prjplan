@@ -47,6 +47,7 @@ Widget _drawerArea(BuildContext context, WidgetRef ref) {
               title: Text(e),
               leading: const Icon(Icons.business),
               onTap: () {
+                projectStateNotifier.calcViewTable(e);
                 // drawer を閉じる
                 Navigator.pop(context);
               },
@@ -129,24 +130,26 @@ class MyScrollBehavior extends MaterialScrollBehavior {
 }
 
 Widget _table(BuildContext context, WidgetRef ref) {
+  final projectStateNotifier = ref.watch(projectStateProvider.notifier);
+  final projectState = ref.watch(projectStateProvider);
+
   return ScrollConfiguration(
       behavior: MyScrollBehavior(),
       child: TableView.builder(
-        cellBuilder: _buildCell,
-        columnCount: 20,
+        cellBuilder: (BuildContext context, TableVicinity vicinity) {
+          return TableViewCell(
+              child: Center(
+            child: Text(
+                '${projectState.viewTable.captions[vicinity.row][vicinity.column]}-'),
+          ));
+        },
+        columnCount: projectState.viewTable.captions[0].length, // 横の数
         columnBuilder: _buildTableSpan,
-        rowCount: 10,
+        rowCount: projectState.viewTable.captions.length, // 縦の数
         rowBuilder: _buildTableSpan,
         pinnedRowCount: 1,
-        pinnedColumnCount: 1,
+        pinnedColumnCount: 2,
       ));
-}
-
-TableViewCell _buildCell(BuildContext context, TableVicinity vicinity) {
-  return TableViewCell(
-      child: Center(
-    child: Text('c: ${vicinity.column}, r: ${vicinity.row}'),
-  ));
 }
 
 TableSpan _buildTableSpan(int index) {
