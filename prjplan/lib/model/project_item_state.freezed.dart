@@ -594,6 +594,7 @@ abstract class _BusinessDetail implements BusinessDetail {
 
 /// @nodoc
 mixin _$MemberDetail {
+  String get member => throw _privateConstructorUsedError;
   List<Task> get filterdTasks => throw _privateConstructorUsedError;
   Map<DateTime, double> get detail => throw _privateConstructorUsedError;
 
@@ -608,7 +609,8 @@ abstract class $MemberDetailCopyWith<$Res> {
           MemberDetail value, $Res Function(MemberDetail) then) =
       _$MemberDetailCopyWithImpl<$Res, MemberDetail>;
   @useResult
-  $Res call({List<Task> filterdTasks, Map<DateTime, double> detail});
+  $Res call(
+      {String member, List<Task> filterdTasks, Map<DateTime, double> detail});
 }
 
 /// @nodoc
@@ -624,10 +626,15 @@ class _$MemberDetailCopyWithImpl<$Res, $Val extends MemberDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? member = null,
     Object? filterdTasks = null,
     Object? detail = null,
   }) {
     return _then(_value.copyWith(
+      member: null == member
+          ? _value.member
+          : member // ignore: cast_nullable_to_non_nullable
+              as String,
       filterdTasks: null == filterdTasks
           ? _value.filterdTasks
           : filterdTasks // ignore: cast_nullable_to_non_nullable
@@ -648,7 +655,8 @@ abstract class _$$MemberDetailImplCopyWith<$Res>
       __$$MemberDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Task> filterdTasks, Map<DateTime, double> detail});
+  $Res call(
+      {String member, List<Task> filterdTasks, Map<DateTime, double> detail});
 }
 
 /// @nodoc
@@ -662,10 +670,15 @@ class __$$MemberDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? member = null,
     Object? filterdTasks = null,
     Object? detail = null,
   }) {
     return _then(_$MemberDetailImpl(
+      null == member
+          ? _value.member
+          : member // ignore: cast_nullable_to_non_nullable
+              as String,
       null == filterdTasks
           ? _value._filterdTasks
           : filterdTasks // ignore: cast_nullable_to_non_nullable
@@ -681,11 +694,13 @@ class __$$MemberDetailImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MemberDetailImpl implements _MemberDetail {
-  const _$MemberDetailImpl(
-      final List<Task> filterdTasks, final Map<DateTime, double> detail)
+  const _$MemberDetailImpl(this.member, final List<Task> filterdTasks,
+      final Map<DateTime, double> detail)
       : _filterdTasks = filterdTasks,
         _detail = detail;
 
+  @override
+  final String member;
   final List<Task> _filterdTasks;
   @override
   List<Task> get filterdTasks {
@@ -704,7 +719,7 @@ class _$MemberDetailImpl implements _MemberDetail {
 
   @override
   String toString() {
-    return 'MemberDetail(filterdTasks: $filterdTasks, detail: $detail)';
+    return 'MemberDetail(member: $member, filterdTasks: $filterdTasks, detail: $detail)';
   }
 
   @override
@@ -712,6 +727,7 @@ class _$MemberDetailImpl implements _MemberDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MemberDetailImpl &&
+            (identical(other.member, member) || other.member == member) &&
             const DeepCollectionEquality()
                 .equals(other._filterdTasks, _filterdTasks) &&
             const DeepCollectionEquality().equals(other._detail, _detail));
@@ -720,6 +736,7 @@ class _$MemberDetailImpl implements _MemberDetail {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      member,
       const DeepCollectionEquality().hash(_filterdTasks),
       const DeepCollectionEquality().hash(_detail));
 
@@ -732,9 +749,12 @@ class _$MemberDetailImpl implements _MemberDetail {
 
 abstract class _MemberDetail implements MemberDetail {
   const factory _MemberDetail(
-          final List<Task> filterdTasks, final Map<DateTime, double> detail) =
-      _$MemberDetailImpl;
+      final String member,
+      final List<Task> filterdTasks,
+      final Map<DateTime, double> detail) = _$MemberDetailImpl;
 
+  @override
+  String get member;
   @override
   List<Task> get filterdTasks;
   @override

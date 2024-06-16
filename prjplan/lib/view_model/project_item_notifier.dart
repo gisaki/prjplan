@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/foundation.dart'; // for compute
+
 import 'package:prjplan/model/project_item_state.dart';
 import 'package:prjplan/model/project_item_db.dart';
 
@@ -20,7 +22,9 @@ class ProjectStateNotifier extends StateNotifier<ProjectState> {
                 "1行-1列",
                 "1行-2列",
               ],
-            ], [])));
+            ], [
+              [0, 0]
+            ])));
 
   // 追加する
   void addMember(String newMember) {
@@ -33,14 +37,18 @@ class ProjectStateNotifier extends StateNotifier<ProjectState> {
     state = state.copyWith(customers: [...oldCustomers, newCustomer]);
   }
 
-  // 更新する
-  void reloadMember() async {
+  // サーバのデータと同期する
+  Future<void> _reload() async {
     ProjectItemDb db = ProjectItemDb();
     List<Task> newTasks = await db.readTasks();
     state = state.copyWith(tasks: newTasks);
+    List<Business> newBusinesses = await db.readBusinesses();
+    state = state.copyWith(businesses: newBusinesses);
+  }
 
-    // メンバを算出しなおす
-    List<String> newMembers = [];
+  // 算出しなおす
+  void _calcMembers(bool refresh) {
+    List<String> newMembers = (refresh) ? [] : [...state.members];
     for (var item in state.tasks) {
       if (!newMembers.contains(item.member)) {
         newMembers.add(item.member);
@@ -49,13 +57,8 @@ class ProjectStateNotifier extends StateNotifier<ProjectState> {
     state = state.copyWith(members: newMembers);
   }
 
-  void reloadCustomer() async {
-    ProjectItemDb db = ProjectItemDb();
-    List<Business> newBusinesses = await db.readBusinesses();
-    state = state.copyWith(businesses: newBusinesses);
-
-    // 会社を算出しなおす
-    List<String> newCustomers = [];
+  void _calcCustomers(bool refresh) {
+    List<String> newCustomers = (refresh) ? [] : [...state.customers];
     for (var item in state.businesses) {
       if (!newCustomers.contains(item.customer)) {
         newCustomers.add(item.customer);
@@ -64,7 +67,28 @@ class ProjectStateNotifier extends StateNotifier<ProjectState> {
     state = state.copyWith(customers: newCustomers);
   }
 
-  void calcViewTable(String customer) {
+  // 追加を取り消す
+  Future<void> reloadMember() async {
+    // サーバのデータと同期する
+    await _reload();
+    // 新しく作り直す
+    _calcMembers(true);
+  }
+
+  Future<void> reloadCustomer() async {
+    // サーバのデータと同期する
+    await _reload();
+    // 新しく作り直す
+    _calcCustomers(true);
+  }
+
+  // 一覧を更新する
+  Future<void> calcViewTable(String customer) async {
+    // サーバのデータと同期する
+    await _reload();
+    _calcMembers(false);
+    _calcCustomers(false);
+    // テーブルを作り直し
     final newViewTable = state.calcViewTable(customer, DateTime.now());
     state = state.copyWith(viewTable: newViewTable);
   }

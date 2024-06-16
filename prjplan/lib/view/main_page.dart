@@ -137,10 +137,18 @@ Widget _table(BuildContext context, WidgetRef ref) {
       behavior: MyScrollBehavior(),
       child: TableView.builder(
         cellBuilder: (BuildContext context, TableVicinity vicinity) {
+          final String caption =
+              projectState.viewTable.captions[vicinity.row][vicinity.column];
+          final double mm =
+              projectState.viewTable.mms[vicinity.row][vicinity.column];
+          final contents = (caption.isNotEmpty)
+              ? caption
+              : (mm != 0.0)
+                  ? mm.toStringAsFixed(2)
+                  : "";
           return TableViewCell(
               child: Center(
-            child: Text(
-                '${projectState.viewTable.captions[vicinity.row][vicinity.column]}-'),
+            child: Text('${contents}'),
           ));
         },
         columnCount: projectState.viewTable.captions[0].length, // 横の数

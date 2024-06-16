@@ -63,8 +63,8 @@ class BusinessDetail with _$BusinessDetail {
 ///
 @freezed
 class MemberDetail with _$MemberDetail {
-  const factory MemberDetail(
-      List<Task> filterdTasks, Map<DateTime, double> detail) = _MemberDetail;
+  const factory MemberDetail(String member, List<Task> filterdTasks,
+      Map<DateTime, double> detail) = _MemberDetail;
 }
 
 /// プロジェクトの集計
@@ -96,9 +96,9 @@ abstract class ProjectState implements _$ProjectState {
 
   Map<DateTime, double> _emptyDetail(DateTime first) {
     Map<DateTime, double> ret = {};
-    for (var i = 0; i <= 12; i++) {
-      final DateTime m = DateTime(first.year, first.month + i, 0);
-      ret[m] = 0.0;
+    for (var iMonth = 0; iMonth < 12; iMonth++) {
+      final DateTime month = DateTime(first.year, first.month + iMonth, 1);
+      ret[month] = 0.0;
     }
     return ret;
   }
@@ -108,21 +108,38 @@ abstract class ProjectState implements _$ProjectState {
   ViewTable calcViewTable(String filterCustomer, DateTime first) {
     final filteredBusinessByCustomer =
         businesses.where((business) => business.customer == filterCustomer);
-    final filteredTasksByProjectId = tasks.where((task) => {
-          filteredBusinessByCustomer.where((business) {
-            return business.projectId == task.projectId;
-          })
-        }.isNotEmpty);
+    List<Task> filteredTasksByProjectId = [];
+    for (final task in tasks) {
+      final businesses = filteredBusinessByCustomer
+          .where((business) => business.projectId == task.projectId);
+      if (businesses.isNotEmpty) {
+        filteredTasksByProjectId.add(task);
+      }
+    }
 
     // 月ごとに工数を集計した人員アサイン
     List<MemberDetail> memberDetails = [];
     {
       for (var member in members) {
-        List<Task> filterdTasks = filteredTasksByProjectId
+        final List<Task> filterdTasks = filteredTasksByProjectId
             .where((task) => task.member == member)
             .toList();
-        Map<DateTime, double> detail = _emptyDetail(first);
-        final MemberDetail memberDetail = MemberDetail(filterdTasks, detail);
+        final Map<DateTime, double> detail = _emptyDetail(first);
+
+        // task の工数を集計
+        for (var task in filterdTasks) {
+          final serach = DateTime(task.month.year, task.month.month, 1);
+          if (detail.containsKey(serach)) {
+            try {
+              detail[serach] = detail[serach]! + task.mm;
+            } catch (e) {
+              // あり得ないはずなので、変な値にしておく（不具合を見つけやすいように）
+              detail[serach] = -99;
+            }
+          }
+        }
+
+        final memberDetail = MemberDetail(member, filterdTasks, detail);
         memberDetails.add(memberDetail);
       }
     }
@@ -132,21 +149,24 @@ abstract class ProjectState implements _$ProjectState {
     {
       for (var business in filteredBusinessByCustomer) {
         final Map<DateTime, double> detail = _emptyDetail(first);
-        final BusinessDetail businessDetail = BusinessDetail(business, detail);
+        final businessDetail = BusinessDetail(business, detail);
         businessDetails.add(businessDetail);
       }
     }
 
-    // captions
+    // 行数やタイトル行の位置等
     final int numOfLines =
         memberDetails.length + businessDetails.length + ViewTable._numOfTitles;
     const int numOfItemsInLine = 12 + ViewTable._numOfCaptions;
+    const titleIdx1 = 0;
+    final titleIdx2 = titleIdx1 + businessDetails.length + 1;
+    final titleIdx3 = titleIdx2 + memberDetails.length + 1;
+
+    // captions
     var captions =
         List.generate(numOfLines, (i) => List.filled(numOfItemsInLine, ""));
     {
-      const titleIdx1 = 0;
-      final titleIdx2 = titleIdx1 + memberDetails.length + 1;
-      final titleIdx3 = titleIdx2 + businessDetails.length + 1;
+      // 表題
       captions[titleIdx1][0] = "名称";
       captions[titleIdx1][1] = "売上";
       for (var i = 0; i < 12; i++) {
@@ -155,11 +175,40 @@ abstract class ProjectState implements _$ProjectState {
         captions[titleIdx2][i + ViewTable._numOfCaptions] = "$m月";
         captions[titleIdx3][i + ViewTable._numOfCaptions] = "$m月";
       }
+      // 中身
+      businessDetails.asMap().forEach((int i, BusinessDetail b) {
+        // 名称 = プロジェクトID
+        captions[(titleIdx1 + 1) + i][0] = b.business.projectId;
+      });
+      memberDetails.asMap().forEach((int i, MemberDetail m) {
+        // 名称 = メンバ名
+        captions[(titleIdx2 + 1) + i][0] = m.member;
+      });
     }
 
     // mms
     var mms =
         List.generate(numOfLines, (i) => List.filled(numOfItemsInLine, 0.0));
+    {
+      // 中身
+      businessDetails.asMap().forEach((int i, BusinessDetail b) {
+        // 売上 = earn
+        mms[(titleIdx1 + 1) + i][1] = b.business.earn;
+      });
+      memberDetails.asMap().forEach((int iMember, MemberDetail m) {
+        // 各月
+        for (var iMonth = 0; iMonth < 12; iMonth++) {
+          final DateTime search = DateTime(first.year, first.month + iMonth, 1);
+          int cellIdx1 = titleIdx2 + 1 + iMember; // 行
+          int cellIdx2 = iMonth + ViewTable._numOfCaptions; // データセル
+          try {
+            mms[cellIdx1][cellIdx2] += m.detail[search]!;
+          } catch (e) {
+            mms[cellIdx1][cellIdx2] = -77;
+          }
+        }
+      });
+    }
 
     // ViewTable
     final viewTable = ViewTable(businessDetails, memberDetails, captions, mms);

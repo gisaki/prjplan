@@ -78,7 +78,7 @@ Widget _memberListArea(BuildContext context, WidgetRef ref) {
             ),
             IconButton(
               icon: const Icon(Icons.refresh),
-              tooltip: '更新',
+              tooltip: '追加を取り消す',
               onPressed: () {
                 projectStateNotifier.reloadMember();
               },
@@ -126,7 +126,7 @@ Widget _customerListArea(BuildContext context, WidgetRef ref) {
             ),
             IconButton(
               icon: const Icon(Icons.refresh),
-              tooltip: '更新',
+              tooltip: '追加を取り消す',
               onPressed: () {
                 projectStateNotifier.reloadCustomer();
               },
